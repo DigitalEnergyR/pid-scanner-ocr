@@ -91,26 +91,27 @@ class PIDScanner:
         try:
             print("Attempting OCR extraction (requires Poppler)...")
             images = convert_from_path(pdf_path, dpi=self.config['ocr_settings']['dpi'])
+            print(f"Converted PDF to {len(images)} images")
+            
             for i, image in enumerate(images):
                 print(f"Processing page {i+1} with OCR...")
-                # Convert PIL image to numpy array
-                img_array = np.array(image)
                 
-                # Preprocess image
-                if len(img_array.shape) == 3:
-                    img_array = self.preprocess_image(img_array)
+                # Direct OCR without preprocessing first (to match working debug version)
+                text = pytesseract.image_to_string(image)
+                print(f"Raw OCR extracted {len(text)} characters from page {i+1}")
                 
-                # Perform OCR
-                ocr_config = self.config['ocr_settings']['tesseract_config']
-                text = pytesseract.image_to_string(img_array, config=ocr_config)
                 if text.strip():
                     text_content.append(text)
-                    print(f"OCR extracted {len(text)} characters from page {i+1}")
+                    print(f"Added page {i+1} to text_content")
+                else:
+                    print(f"Page {i+1} produced empty OCR result")
                 
         except Exception as e:
             print(f"Error with OCR extraction: {e}")
-            print("Note: OCR requires Poppler to be installed. Install from: https://poppler.freedesktop.org/")
+            import traceback
+            print(f"Full error: {traceback.format_exc()}")
         
+        print(f"Final text_content has {len(text_content)} items")
         return text_content
     
     def extract_patterns(self, text: str, patterns: List[str]) -> List[str]:
