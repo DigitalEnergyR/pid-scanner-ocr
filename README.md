@@ -1,6 +1,6 @@
-# P&ID Scanner OCR
+# P&ID Scanner OCR 🛢️⚡
 
-Professional P&ID Analysis Tool with Full OCR Capabilities by Digital Energy Services
+AI-Powered P&ID Analysis Tool for Oil & Gas Engineering | Alberta Energy Tech | Piping & Instrumentation Diagram OCR
 
 ## 🚀 Features
 
