@@ -26,13 +26,13 @@
     }
   },
   "ocr_settings": {
-    "dpi": 300,
+    "dpi": 150,
     "preprocessing": {
-      "denoise": true,
-      "enhance_contrast": true,
-      "sharpen": true
+      "denoise": false,
+      "enhance_contrast": false,
+      "sharpen": false
     },
-    "tesseract_config": "--psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-./\"' "
+    "tesseract_config": "--psm 6"
   },
   "output_format": "json"
 }

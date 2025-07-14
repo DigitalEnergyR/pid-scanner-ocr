@@ -90,7 +90,8 @@ class PIDScanner:
         # Method 2: Convert PDF to images and use OCR (requires Poppler)
         try:
             print("Attempting OCR extraction (requires Poppler)...")
-            images = convert_from_path(pdf_path, dpi=self.config['ocr_settings']['dpi'])
+            # Use fast settings for better performance
+            images = convert_from_path(pdf_path, dpi=150, first_page=1, last_page=1)  # Only process first page for speed
             print(f"Converted PDF to {len(images)} images")
             
             for i, image in enumerate(images):
