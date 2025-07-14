@@ -76,10 +76,16 @@ class PIDScanner:
         except Exception as e:
             print(f"Error extracting text with pdfplumber: {e}")
         
-        # If we got text from pdfplumber, return it
+        # If we got meaningful text from pdfplumber, return it
         if text_content:
-            print(f"Successfully extracted text from {len(text_content)} pages using pdfplumber")
-            return text_content
+            combined_text = " ".join(text_content)
+            # Check if the text is actually useful (more than just whitespace)
+            if len(combined_text.strip()) > 50:  # At least 50 characters of real text
+                print(f"Successfully extracted meaningful text from {len(text_content)} pages using pdfplumber")
+                return text_content
+            else:
+                print(f"pdfplumber extracted only {len(combined_text.strip())} characters - trying OCR instead")
+                text_content = []  # Clear it so we fall through to OCR
         
         # Method 2: Convert PDF to images and use OCR (requires Poppler)
         try:

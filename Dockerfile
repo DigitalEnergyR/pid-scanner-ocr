@@ -35,5 +35,5 @@ EXPOSE 8501
 # Health check
 HEALTHCHECK CMD curl --fail http://localhost:${PORT:-8501}/_stcore/health
 
-# Run the debug application
-CMD ["sh", "-c", "streamlit run debug_streamlit.py --server.port=${PORT:-8501} --server.address=0.0.0.0 --server.enableCORS=false --server.enableXsrfProtection=false"]
+# Run the application
+CMD ["sh", "-c", "streamlit run streamlit_app.py --server.port=${PORT:-8501} --server.address=0.0.0.0 --server.enableCORS=false --server.enableXsrfProtection=false"]
